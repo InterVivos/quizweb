@@ -1,0 +1,40 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+    <!-- Header -->
+    <header id="header" class="ex-2-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Iniciar Sesión</h1>
+                   <p>Sin cuenta? <a class="white" href="{% url 'main:register' %}">Regístrate</a></p> 
+                    <!-- Sign Up Form -->
+                    <div class="form-container">
+                        <form id="logInForm" data-toggle="validator" data-focus="false">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="text" class="form-control-input" id="lemail" required>
+                                <label class="label-control" for="lemail">Nombre de usuario</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control-input" id="lpassword" required>
+                                <label class="label-control" for="lpassword">Contraseña</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="form-control-submit-button">INICIAR SESIÓN</button>
+                            </div>
+                            <div class="form-message">
+                                <div id="lmsgSubmit" class="h3 text-center hidden"></div>
+                            </div>
+                        </form>
+                    </div> <!-- end of form container -->
+                    <!-- end of sign up form -->
+
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </header> <!-- end of ex-header -->
+    <!-- end of header -->
+{% endblock %}

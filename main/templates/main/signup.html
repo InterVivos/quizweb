@@ -1,0 +1,50 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+    <!-- Header -->
+    <header id="header" class="ex-2-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Registro</h1>
+                   <p>Ya tienes cuenta? <a class="white" href="{% url 'main:login' %}">Inicia sesión</a></p> 
+                    <!-- Sign Up Form -->
+                    <div class="form-container">
+                        <form id="signUpForm" data-toggle="validator" data-focus="false">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="text" class="form-control-input" id="sname" required>
+                                <label class="label-control" for="sname">Nombre de usuario</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control-input" id="semail" required>
+                                <label class="label-control" for="semail">Email</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control-input" id="spassword1" required>
+                                <label class="label-control" for="spassword">Contraseña</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control-input" id="spassword2" required>
+                                <label class="label-control" for="spassword">Confirmar contraseña</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="form-control-submit-button">REGISTRARSE</button>
+                            </div>
+                            <div class="form-message">
+                                <div id="smsgSubmit" class="h3 text-center hidden"></div>
+                            </div>
+                        </form>
+                    </div> <!-- end of form container -->
+                    <!-- end of sign up form -->
+
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </header> <!-- end of ex-header -->
+    <!-- end of header -->
+{% endblock %}
