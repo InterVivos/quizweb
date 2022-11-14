@@ -230,6 +230,8 @@
         // initiate variables with form content
 		var email = $("#lemail").val();
 		var password = $("#lpassword").val();
+        var url1 = new URL(location.href)
+        var nextPage = url1.searchParams.get("next")
         
         $.ajax({
             type: "POST",
@@ -240,7 +242,10 @@
                 //alert('Successfull');
                 if (text == "success") {
                     //lformSuccess();
-                    window.location="/"
+                    if (nextPage != null) {
+                        window.location = nextPage;
+                    }
+                    else {window.location="/";}
                 } else {
                     lformError();
                     lsubmitMSG(false, "Credenciales incorrectas");

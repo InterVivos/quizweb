@@ -10,7 +10,7 @@
                         <div class="text-container">
                             <h1>SaaS App HTML Landing Page</h1>
                             <p class="p-large">Use Tivo to automate your marketing actions in order to reach a much larger audience</p>
-                            <a class="btn-solid-lg page-scroll" href="{% if user.is_authenticated %}{% url 'main:home' %}">EMPEZAR A CREAR QUICES{% else %}{% url 'main:register' %}">REGISTRARSE{% endif %}</a>
+                            <a class="btn-solid-lg page-scroll" href="{% if user.is_authenticated %}{% url 'dashboard:home' %}">EMPEZAR A CREAR QUICES{% else %}{% url 'main:register' %}">REGISTRARSE{% endif %}</a>
                         </div> <!-- end of text-container -->
                     </div> <!-- end of col -->
                     <div class="col-lg-6 col-xl-7">
