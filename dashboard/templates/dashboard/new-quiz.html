@@ -1,0 +1,127 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Nuevo quiz</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="dashboard"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#!">Nuevo quiz</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+
+        <div class="row">
+            
+            <div class="col-xl-12">
+                <div class="card">
+
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input class="mb-3 form-control form-control-lg" type="text" placeholder="Título">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body" id="seccionPreguntas">
+                        
+                        <div class="row card-option" id="seccionAñadir">
+                            <div class="col-md-6">
+                                <div class="btn-group card-option" style="vertical-align: baseline;">
+                                    <select class="mb-3 form-control" id="opcionAñadir">
+                                        <option>Opción múltiple</option>
+                                        <option>Llenar espacio</option>
+                                    </select>
+                                    <button type="button" class="btn btn-icon btn-success" style="width: 70px;border-radius: 0% 20% 20% 0%;" id="selAñadir">
+                                        <i class="feather icon-plus"></i>
+                                    </button>
+                                </div>
+                                <button type="button" class="btn btn-primary reload-card" style="border-radius: 10px;" id="guardar">Guardar <i class="feather icon-save"></i></button>
+                                <a href="dashboard">
+                                    <button type="button" class="btn btn-secondary" style="border-radius: 10px;" id="cancelar">Atrás <i class="feather icon-corner-up-left"></i></button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
+{% endblock %}
+
+{% block templates %}
+<template>
+    <div class="card" style="border-bottom: 1px solid rgba(0, 0, 0, 0.1); border-left: 1px solid rgba(0, 0, 0, 0.1); border-right: 1px solid rgba(0, 0, 0, 0.1);">
+        <div class="card-header">
+            <div class="col-md-10">
+                <input class="mb-3 form-control form-control" type="text" placeholder="Título">
+            </div>
+            <hr>
+            <div class="card-header-right">
+                <div class="card-option" style="padding-top: 11px;">
+                    <button type="button" class="btn btn-danger" style="border-radius: 10px;">
+                        <a href="#!"><i class="feather icon-trash" style="color: white;"></i></a></button>
+                    <button type="button" class="btn btn-success" style="border-radius: 10px;">
+                        <a href="#!"><i class="feather icon-arrow-up" style="color: white;"></i></a></button>
+                    <button type="button" class="btn btn-info" style="border-radius: 10px;">
+                        <a href="#!"><i class="feather icon-arrow-down" style="color: white;"></i></a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template>
+    <div class="col-md-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" aria-label="Checkbox for following text input">
+                </div>
+            </div>
+            <input type="text" class="form-control" aria-label="Text input with checkbox">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" aria-label="Checkbox for following text input">
+                </div>
+            </div>
+            <input type="text" class="form-control" aria-label="Text input with checkbox">
+        </div>
+    </div>
+</template>
+
+<template>
+    <div class="col-md-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">Respuesta</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+    </div>
+</template>
+{% endblock %}
+
+{% block scripts %}
+<!-- Apex Chart -->
+<!-- custom-chart js -->
+<script src="{% static 'js/dashboard/pages/newquiz.js' %}"></script>
+{% endblock %}

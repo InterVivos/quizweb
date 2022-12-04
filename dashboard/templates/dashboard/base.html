@@ -64,6 +64,9 @@
 					<li class="nav-item">
 					    <a href="dashboard" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
 					</li>
+					<li class="nav-item">
+					    <a href="dashboardindex" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard - 1</span></a>
+					</li>
 					<li class="nav-item pcoded-hasmenu">
 					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Page layouts</span></a>
 					    <ul class="pcoded-submenu">
@@ -354,6 +357,9 @@
     <![endif]-->
     <!-- Warning Section Ends -->
 
+	{% block templates %}
+	{% endblock %}
+
     <!-- Required Js -->
     <script src="{% static 'js/dashboard/vendor-all.min.js' %}"></script>
     <script src="{% static 'js/dashboard/plugins/bootstrap.min.js' %}"></script>
@@ -361,6 +367,7 @@
 
 {% block scripts %}
 {% endblock %}
+
 </body>
 
 </html>

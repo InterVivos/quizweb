@@ -11,8 +11,20 @@ def pages_views(request):
         context = {}
         render(request, request.path(), context)
 
-class MainView(LoginRequiredMixin, View):
+class MainView1(LoginRequiredMixin, View):
     template_name = "dashboard/index.html"
+    login_url = '/login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        return context
+    
+    def get(self, request):
+        return render(request, template_name=self.template_name)
+
+class MainView(LoginRequiredMixin, View):
+    template_name = "dashboard/index1.html"
     login_url = '/login'
 
     def get_context_data(self, **kwargs):

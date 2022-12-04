@@ -13,6 +13,7 @@ app_name = 'dashboard'
 urlpatterns = [
     #path('dashboard', views.MainView.as_view(), name = "home"),
     #path('dashboard', login_required(function=TemplateView.as_view(template_name="dashboard/index.html"), login_url='/login'), name="home"),
+    path('dashboardindex', login_required(function=views.MainView1.as_view(), login_url='/login'), name="home1"),
     path('dashboard', login_required(function=views.MainView.as_view(), login_url='/login'), name="home"),
 ]
 

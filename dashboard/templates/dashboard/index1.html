@@ -1,0 +1,96 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Quices</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#!">Quices</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+
+        <div class="row">
+
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Mis quices</h3>
+                        <div class="card-header-right">
+                            <div class="card-option">
+                                <a href="new-quiz.html">
+                                    <button type="button" class="btn btn-success" style="border-radius: 10px;">
+                                        <h5 style="color: white;">Nuevo quiz </h5><i class="feather icon-plus" style="color: white;"></i></button>
+                                </a>
+                                <button type="button" class="btn btn-info reload-card" style="border-radius: 10px;">
+                                    <a href="#!"><i class="feather icon-refresh-ccw" style="color: white;"></i></a></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body table-border-style">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th width="65%"></th>
+                                        <th>Tipo</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="vertical-align: middle;">1</td>
+                                        <td style="vertical-align: middle;"><h4>Derivadas e Integrales</h4></td>
+                                        <td style="vertical-align: middle;">Por defecto</td>
+                                        <td>
+                                            <button type="button" class="btn  btn-icon btn-info"><i class="feather icon-link"></i></button>
+                                            <button type="button" class="btn  btn-icon btn-primary"><i class="feather icon-copy"></i></button>
+                                            <button type="button" class="btn  btn-icon btn-danger"><i class="feather icon-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>@fat</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Apex Chart -->
+<script src="{% static 'js/dashboard/plugins/apexcharts.min.js' %}"></script>
+
+
+<!-- custom-chart js -->
+<script src="{% static 'js/dashboard/pages/dashboard-main.js' %}"></script>
+{% endblock %}
