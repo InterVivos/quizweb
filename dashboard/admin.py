@@ -10,4 +10,4 @@ class QuizAdmin(admin.ModelAdmin):
 @admin.register(Respuesta)
 class RespuestaAdmin(admin.ModelAdmin):
     list_display = ('fecha', 'quiz', 'alias', 'puntaje')
-    readonly_fields = ('quiz')
+    readonly_fields = ('quiz',)

@@ -29,7 +29,7 @@ class Quiz(models.Model):
             #self.genId()
         super(Quiz, self).save(*args, **kwargs)
 
-class Respuesta:
+class Respuesta(models.Model):
     class Meta:
         verbose_name_plural = 'Respuestas'
         verbose_name = 'Respuesta'
@@ -39,4 +39,4 @@ class Respuesta:
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, null=True)
     alias = models.CharField(max_length=256, null=True, blank=True)
     puntaje = models.IntegerField(default=0)
-    respuestas = models.JSONField
+    respuestas = models.JSONField()

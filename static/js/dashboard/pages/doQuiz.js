@@ -137,7 +137,7 @@ function enviarQuiz()
     //console.log(respuestas);
     //console.log(alias);
     let datos = {
-        alias = alias;
-        respuestas = respuestas;
+        alias : alias,
+        respuestas : respuestas
     }
 }

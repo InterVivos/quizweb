@@ -40,7 +40,7 @@
 						<h4 class="mb-3 f-w-400">{{object.titulo}}</h4>
 						<h6>por {{object.autor.get_username}}</h6>
 						<hr>
-						<form>
+						<form onkeydown="return event.key != 'Enter';">
 							<div class="form-group mb-3">
 								<input type="text" class="form-control" id="Email" placeholder="Nombre" required="true">
 							</div>
