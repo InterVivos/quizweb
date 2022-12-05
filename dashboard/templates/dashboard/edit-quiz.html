@@ -1,6 +1,7 @@
 {% extends 'dashboard/new-quiz.html' %}
 {% load static %}
 {% load ziptag %}
+{% block tituloQuiz %}value="{{object.titulo}}"{% endblock %}
 {% block preguntas %}
     {% for pregunta in object.contenido %}
         <div class="card" style="border-bottom: 1px solid rgba(0, 0, 0, 0.1); border-left: 1px solid rgba(0, 0, 0, 0.1); border-right: 1px solid rgba(0, 0, 0, 0.1);">

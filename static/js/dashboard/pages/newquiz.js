@@ -7,6 +7,15 @@ for(i = 0; i < temp.length; i++)
     temp[i].content.querySelector("div");
 }
 
+var btnElim = document.getElementsByClassName('btn-danger');
+for(i=0; i < btnElim.length; i++)
+{
+    var parentBtn = btnElim[i].parentElement.parentNode.parentNode.parentNode;
+    btnElim[i].addEventListener("click", () => {
+        eliminarPregunta(parentBtn);
+    });
+};
+
 document.getElementById("selAñadir").addEventListener("click", añadir);
 document.getElementById("btnGuardar").addEventListener("click", guardarQuiz);
 
