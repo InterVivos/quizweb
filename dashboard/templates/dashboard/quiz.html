@@ -33,28 +33,55 @@
 <div class="auth-wrapper">
 	<div class="auth-content text-center">
 		<img src="{% static 'assets/images/logo.png' %}" alt="" class="img-fluid mb-4">
-		<div class="card borderless">
+		<div class="card borderless" id="principal">
 			<div class="row align-items-center ">
 				<div class="col-md-12">
 					<div class="card-body">
-						<h4 class="mb-3 f-w-400">Signin</h4>
+						<h4 class="mb-3 f-w-400">{{object.titulo}}</h4>
+						<h6>por {{object.autor.get_username}}</h6>
 						<hr>
-						<div class="form-group mb-3">
-							<input type="text" class="form-control" id="Email" placeholder="Email address">
-						</div>
-						<div class="form-group mb-4">
-							<input type="password" class="form-control" id="Password" placeholder="Password">
-						</div>
-						<div class="custom-control custom-checkbox text-left mb-4 mt-2">
-							<input type="checkbox" class="custom-control-input" id="customCheck1">
-							<label class="custom-control-label" for="customCheck1">Save credentials.</label>
-						</div>
-						<button class="btn btn-block btn-primary mb-4">Signin</button>
+						<form>
+							<div class="form-group mb-3">
+								<input type="text" class="form-control" id="Email" placeholder="Nombre" required="true">
+							</div>
+						</form>
+						<button class="btn btn-block btn-primary mb-4" id="iniciarQuiz">Iniciar quiz</button>
 						<hr>
-						<p class="mb-2 text-muted">Forgot password? <a href="auth-reset-password.html" class="f-w-400">Reset</a></p>
-						<p class="mb-0 text-muted">Don’t have an account? <a href="auth-signup.html" class="f-w-400">Signup</a></p>
 					</div>
 				</div>
+			</div>
+			<div class="card-header" id="seccionTitulo" hidden="hidden">
+				<div class="row text-left">
+					<div class="col-md-12">
+						<h3>{{object.titulo}}</h3>
+					</div>
+				</div>
+			</div>
+
+			<div class="card-body text-left" id="seccionPreguntas" hidden="hidden">
+			{% for pregunta in object.contenido %}
+				<h5>{{pregunta.enunciado}}</h5>
+				<hr>
+
+				{% if pregunta.tipo == "elegir" %}
+				<div class="col-md-6">
+					{% for opcion in pregunta.opciones %}
+					<div class="custom-control custom-checkbox">
+						<input type="checkbox" class="custom-control-input" id="customCheck{{forloop.counter0}}">
+						<label class="custom-control-label" for="customCheck{{forloop.counter0}}">{{opcion}}</label>
+					</div>
+					{% endfor %}
+				</div>
+				{% else %}
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="inputGroup-sizing-default">Respuesta</span>
+					</div>
+					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+				</div>
+				{% endif %}
+
+			{% endfor %}
 			</div>
 		</div>
 	</div>
@@ -65,6 +92,7 @@
 <script src="{% static 'js/dashboard/vendor-all.min.js' %}"></script>
 <script src="{% static 'js/dashboard/plugins/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/dashboard/pcoded.min.js' %}"></script>
+<script src="{% static 'js/dashboard/pages/doQuiz.js' %}"></script>
 
 
 </body>
