@@ -1,4 +1,5 @@
 import json
+from multiprocessing import get_context
 from traceback import print_exc, print_stack
 from django.contrib import messages
 from django.shortcuts import render, redirect
@@ -44,18 +45,29 @@ class MainView1(LoginRequiredMixin, View):
     def get(self, request):
         return render(request, template_name=self.template_name)
 
-class MainView(LoginRequiredMixin, View):
+class MainView(LoginRequiredMixin, generic.ListView):
     template_name = "dashboard/index1.html"
     login_url = '/login'
+    model = Quiz
+    paginate_by: 10
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_queryset(self):
+        return super().get_queryset().filter(autor=self.request.user)
 
-        return context
+    '''def get_context_data(self, **kwargs):
+        self.context = super().get_context_data(**kwargs)
+        #context["quices"] = Quiz.objects.filter(autor=self.request.user)
+        #context["quices"] = Quiz.objects.all()
+        self.context["quices"] = Quiz.objects.all()
+        return self.context'''
     
-    def get(self, request):
-        return render(request, template_name=self.template_name)
+    #def get(self, request):
+    #    return render(request, template_name=self.template_name, context=self.context)
 
 class CodigoQuiz(generic.DetailView):
     model = Quiz
     template_name = "dashboard/quiz.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
