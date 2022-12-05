@@ -1,0 +1,48 @@
+{% extends 'dashboard/new-quiz.html' %}
+{% load static %}
+{% load ziptag %}
+{% block preguntas %}
+    {% for pregunta in object.contenido %}
+        <div class="card" style="border-bottom: 1px solid rgba(0, 0, 0, 0.1); border-left: 1px solid rgba(0, 0, 0, 0.1); border-right: 1px solid rgba(0, 0, 0, 0.1);">
+            <div class="card-header {{pregunta.tipo}}">
+                <div class="col-md-10">
+                    <input class="mb-3 form-control form-control" type="text" placeholder="Título" value="{{pregunta.enunciado}}">
+                </div>
+                <hr>
+                <div class="card-header-right">
+                    <div class="card-option" style="padding-top: 11px;">
+                        <button type="button" class="btn btn-danger" style="border-radius: 10px;">
+                            <a href="#!"><i class="feather icon-trash" style="color: white;"></i></a></button>
+                        <button type="button" class="btn btn-success" style="border-radius: 10px;">
+                            <a href="#!"><i class="feather icon-arrow-up" style="color: white;"></i></a></button>
+                        <button type="button" class="btn btn-info" style="border-radius: 10px;">
+                            <a href="#!"><i class="feather icon-arrow-down" style="color: white;"></i></a></button>
+                    </div>
+                </div>
+                {% if pregunta.tipo == "elegir" %}
+                <div class="col-md-6">
+                    {% for opcion, respuesta in pregunta.opciones|zip:pregunta.respuestas %}
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <input type="checkbox" aria-label="Checkbox for following text input" {% if respuesta is True %}checked{% endif %}>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Text input with checkbox" value="{{opcion}}">
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="col-md-6">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Respuesta</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="{{pregunta.respuesta}}">
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -17,6 +17,8 @@ urlpatterns = [
     path('dashboard', login_required(function=views.MainView.as_view(), login_url='/login'), name="home"),
     path('save-quiz', views.saveQuiz, name="save-quiz"),
     path('quiz/<slug:slug>', views.CodigoQuiz.as_view(), name = 'quiz'),
+    #path('edit-quiz/<slug:slug>', views.EditarQuiz.as_view(), name = 'edit-quiz'),
+    path('edit-quiz', views.editarQuizFunc, name = 'edit-quiz'),
 ]
 
 ###Prueba de páginas
@@ -27,7 +29,7 @@ with os.scandir(os.getcwd() + "/dashboard/templates/dashboard") as archivos:
         if not archivo.name.startswith('.'):
             #archivoN = "dashboard/" + archivo.name
             #if archivo.name == 'index.html': archivo.name = "dashboard.html"
-            if archivo.name == "index.html": continue
+            if archivo.name == "index.html" or archivo.name == "edit-quiz.html": continue
             archivoN = archivo.name
             #urlpatterns.append(path(archivoN, TemplateView.as_view(template_name="dashboard/" + archivo.name), name=archivo.name))
             urlpatterns.append(path(archivoN, login_required(function=TemplateView.as_view(template_name="dashboard/" + archivo.name), login_url='/login'), name=archivo.name))

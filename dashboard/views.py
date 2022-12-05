@@ -15,16 +15,30 @@ from .forms import *
 def saveQuiz(request):
     if request.user.is_authenticated:
         if request.method == "POST":
+            idQuiz = request.POST.get("id")
             titulo = request.POST.get("titulo")
             contenido = request.POST.get("contenido")
             
-            quiz = QuizForm({'autor':request.user, 'titulo':titulo, 'contenido':contenido, 'activo':True})
+            if(idQuiz is None):
+                quiz = QuizForm({'autor':request.user, 'titulo':titulo, 'contenido':contenido, 'activo':True})
 
-            if quiz.is_valid():
-                quiz.save()
-                return HttpResponse("success", content_type='text/plain')
+                if quiz.is_valid():
+                    quiz.save()
+                    return HttpResponse("success", content_type='text/plain')
+                else:
+                    return HttpResponse("error", content_type='text/plain')
             else:
-                return HttpResponse("error", content_type='text/plain')
+                quiz_a_editar = Quiz.objects.get(slug=idQuiz)
+                if(quiz_a_editar.autor == request.user):
+                    quiz_a_editar.titulo = titulo
+                    quiz_a_editar.contenido = json.loads(contenido)
+                    #quiz_a_editar.contenido = contenido.replace('\"', '"').strip('"')
+                    quiz_a_editar.save()
+                    return HttpResponse("success", content_type='text/plain')
+                else:
+                    return HttpResponse("error", content_type='text/plain')
+
+
 
 def pages_views(request):
     if not request.user.is_authenticated:
@@ -63,6 +77,15 @@ class MainView(LoginRequiredMixin, generic.ListView):
     
     #def get(self, request):
     #    return render(request, template_name=self.template_name, context=self.context)
+
+def editarQuizFunc(request):
+    if request.user.is_authenticated:
+        idQuiz = request.GET.get('id')
+        if(idQuiz is not None):
+            quiz_a_editar = Quiz.objects.get(slug=idQuiz)
+            if(quiz_a_editar.autor == request.user):
+                context = {'object': quiz_a_editar}
+                return render(request, "dashboard/edit-quiz.html", context)
 
 class CodigoQuiz(generic.DetailView):
     model = Quiz

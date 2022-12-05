@@ -74,20 +74,23 @@ function guardarQuiz()
     }
     //console.log(contenido);
 
-    //var url1 = new URL(location.href);
-    //var nextPage = url1.searchParams.get("next");
+    var url1 = new URL(location.href);
+    var idQuiz = url1.searchParams.get("id");
 
     var sendInfo = {
         titulo: titulo,
         contenido: contenido
     }
 
+    var datos = "titulo=" + titulo + "&contenido=" + JSON.stringify(contenido);
+    if (idQuiz != null) datos = datos + "&id=" + idQuiz;
+
     $.ajax({
         type: "POST",
         url: "save-quiz",
         //contentType: "application/json",
         //dataType: "json",
-        data: "titulo=" + titulo + "&contenido=" + JSON.stringify(contenido), //+ "&csrfmiddlewaretoken=" + $('input[name=csrfmiddlewaretoken').val(),
+        data: datos, //+ "&csrfmiddlewaretoken=" + $('input[name=csrfmiddlewaretoken').val(),
         //data: JSON.stringify(sendInfo),
         success:function(text){
             //alert('Successfull');

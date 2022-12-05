@@ -37,7 +37,8 @@
                     </div>
 
                     <div class="card-body" id="seccionPreguntas">
-                        
+                        {% block preguntas %}
+                        {% endblock %}
                         <div class="row card-option" id="seccionAñadir">
                             <div class="col-md-6">
                                 <div class="btn-group card-option" style="vertical-align: baseline;">
@@ -50,7 +51,7 @@
                                     </button>
                                 </div>
                                 <button type="button" class="btn btn-primary reload-card" style="border-radius: 10px;" id="btnGuardar">Guardar <i class="feather icon-save"></i></button>
-                                <a href="dashboard">
+                                <a href="{% url 'dashboard:home' %}">
                                     <button type="button" class="btn btn-secondary" style="border-radius: 10px;" id="cancelar">Atrás <i class="feather icon-corner-up-left"></i></button>
                                 </a>
                             </div>
