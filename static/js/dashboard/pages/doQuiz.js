@@ -4,17 +4,23 @@ const seccionPreguntas = document.getElementById("seccionPreguntas")
 const tamañoVent = document.querySelector('.auth-content');
 const formStart = document.getElementsByTagName("form")[0];
 
+var alias;
+
 document.getElementById("iniciarQuiz").addEventListener("click", initQuiz);
 
 function initQuiz()
 {
     if(formStart.reportValidity())
     {
+        alias = principal.firstElementChild.getElementsByTagName("input")[0].value;
         principal.firstElementChild.remove();
         
         tamañoVent.style.width = '800px';
         seccionTitulo.removeAttribute('hidden');
         seccionPreguntas.removeAttribute('hidden');
+
+        var btnEnviar = document.getElementById("enviar");
+        btnEnviar.addEventListener("click", enviarQuiz);
     }
 }
 
@@ -100,10 +106,38 @@ function guardarQuiz()
         success:function(text){
             //alert('Successfull');
             if (text == "success") {
-                console.log("YAY");
+                console.log("Success");
             } else {
-                console.log("oh no");
+                console.log("Error");
             }
         }
     });
+}
+
+function enviarQuiz()
+{
+    let nPreguntas = Array.from(seccionPreguntas.children).filter(el => el.tagName === 'DIV');
+    var respuestas = [];
+    for(i = 0; i < nPreguntas.length; i++)
+    {
+        var opciones = nPreguntas[i].getElementsByTagName('input');
+        if(nPreguntas[i].classList[1] == 'elegir')
+        {
+            respuestas[i] = [];
+            for(j = 0; j < opciones.length; j++)
+            {
+                respuestas[i][j] = opciones[j].checked;
+            }
+        }
+        else
+        {
+            respuestas[i] = opciones[0].value;
+        }
+    }
+    //console.log(respuestas);
+    //console.log(alias);
+    let datos = {
+        alias = alias;
+        respuestas = respuestas;
+    }
 }

@@ -64,7 +64,7 @@
 				<hr>
 
 				{% if pregunta.tipo == "elegir" %}
-				<div class="col-md-6">
+				<div class="col-md-6 elegir">
 					{% for opcion in pregunta.opciones %}
 					<div class="custom-control custom-checkbox">
 						<input type="checkbox" class="custom-control-input" id="customCheck{{forloop.counter0}}">
@@ -73,15 +73,17 @@
 					{% endfor %}
 				</div>
 				{% else %}
-				<div class="input-group mb-3">
+				<div class="input-group mb-3 llenar">
 					<div class="input-group-prepend">
 						<span class="input-group-text" id="inputGroup-sizing-default">Respuesta</span>
 					</div>
 					<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 				</div>
 				{% endif %}
-
+				<br>
 			{% endfor %}
+			<hr>
+			<button type="button" class="btn  btn-primary" data-dismiss="modal" id="enviar">Enviar</button>
 			</div>
 		</div>
 	</div>
