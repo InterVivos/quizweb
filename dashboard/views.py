@@ -1,8 +1,29 @@
+import json
+from traceback import print_exc, print_stack
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views import View, generic
+from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from .forms import *
 
 # Create your views here.
+
+@csrf_exempt
+def saveQuiz(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            titulo = request.POST.get("titulo")
+            contenido = request.POST.get("contenido")
+            
+            quiz = QuizForm({'autor':request.user, 'titulo':titulo, 'contenido':contenido, 'activo':True})
+
+            if quiz.is_valid():
+                quiz.save()
+                return HttpResponse("success", content_type='text/plain')
+            else:
+                return HttpResponse("error", content_type='text/plain')
 
 def pages_views(request):
     if not request.user.is_authenticated:
@@ -34,3 +55,7 @@ class MainView(LoginRequiredMixin, View):
     
     def get(self, request):
         return render(request, template_name=self.template_name)
+
+class CodigoQuiz(generic.DetailView):
+    model = Quiz
+    template_name = "dashboard/quiz.html"

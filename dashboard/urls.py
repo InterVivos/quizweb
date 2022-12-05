@@ -15,6 +15,8 @@ urlpatterns = [
     #path('dashboard', login_required(function=TemplateView.as_view(template_name="dashboard/index.html"), login_url='/login'), name="home"),
     path('dashboardindex', login_required(function=views.MainView1.as_view(), login_url='/login'), name="home1"),
     path('dashboard', login_required(function=views.MainView.as_view(), login_url='/login'), name="home"),
+    path('save-quiz', views.saveQuiz, name="save-quiz"),
+    path('quiz/<slug:slug>', views.CodigoQuiz.as_view(), name = 'quiz'),
 ]
 
 ###Prueba de páginas

@@ -11,17 +11,22 @@ class Quiz(models.Model):
         ordering = ["-fecha"]
     
     fecha = models.DateTimeField(auto_now_add=True)
-    autor = models.OneToOneField(User, on_delete=models.CASCADE)
+    autor = models.ForeignKey(User, on_delete=models.CASCADE)
     titulo = models.CharField(max_length=256)
     contenido = models.JSONField()
+    #contenido = models.CharField(max_length=20000)
     activo = models.BooleanField(default=False)
-    slug = models.SlugField(null=True, blank=True)
+    slug = models.SlugField(null=True, blank=True, unique=True)
+
+    def genId(self):
+        while(True):
+            self.slug = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+            if(Quiz.objects.filter(slug=self.slug).first is None): break
 
     def save(self, *args, **kwargs):
         if not self.id:
-            while(True):
-                self.slug = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
-                if(Quiz.objects.filter(slug=self.slug).first is None): break
+            self.slug = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+            #self.genId()
         super(Quiz, self).save(*args, **kwargs)
 
 class Respuesta:
