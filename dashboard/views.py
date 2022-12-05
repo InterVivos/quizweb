@@ -12,7 +12,6 @@ from .forms import *
 
 # Create your views here.
 
-@csrf_exempt
 def saveQuiz(request):
     if request.user.is_authenticated:
         if request.method == "POST":

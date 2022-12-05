@@ -85,13 +85,15 @@ function guardarQuiz()
 
     var url1 = new URL(location.href);
     var idQuiz = url1.searchParams.get("id");
+    let cookie = document.cookie
+    let csrfToken = cookie.substring(cookie.indexOf('=') + 1)
 
-    var sendInfo = {
-        titulo: titulo,
-        contenido: contenido
-    }
+    //var sendInfo = {
+    //    titulo: titulo,
+    //    contenido: contenido
+    //}
 
-    var datos = "titulo=" + titulo + "&contenido=" + JSON.stringify(contenido);
+    var datos = "titulo=" + titulo + "&contenido=" + JSON.stringify(contenido) + "&csrfmiddlewaretoken=" + csrfToken;
     if (idQuiz != null) datos = datos + "&id=" + idQuiz;
 
     $.ajax({
