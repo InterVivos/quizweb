@@ -16,6 +16,7 @@ urlpatterns = [
     path('dashboardindex', login_required(function=views.MainView1.as_view(), login_url='/login'), name="home1"),
     path('dashboard', login_required(function=views.MainView.as_view(), login_url='/login'), name="home"),
     path('save-quiz', views.saveQuiz, name="save-quiz"),
+    path('quiz/send-quiz', views.sendQuiz, name="send-quiz"),
     path('quiz/<slug:slug>', views.CodigoQuiz.as_view(), name = 'quiz'),
     #path('edit-quiz/<slug:slug>', views.EditarQuiz.as_view(), name = 'edit-quiz'),
     path('edit-quiz', views.editarQuizFunc, name = 'edit-quiz'),

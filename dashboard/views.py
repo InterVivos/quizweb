@@ -2,6 +2,7 @@ import json
 from multiprocessing import get_context
 from traceback import print_exc, print_stack
 from django.contrib import messages
+from django.forms import ModelChoiceField
 from django.shortcuts import render, redirect
 from django.views import View, generic
 from django.http import HttpResponse
@@ -28,17 +29,36 @@ def saveQuiz(request):
                 else:
                     return HttpResponse("error", content_type='text/plain')
             else:
-                quiz_a_editar = Quiz.objects.get(slug=idQuiz)
-                if(quiz_a_editar.autor == request.user):
-                    quiz_a_editar.titulo = titulo
-                    quiz_a_editar.contenido = json.loads(contenido)
-                    #quiz_a_editar.contenido = contenido.replace('\"', '"').strip('"')
-                    quiz_a_editar.save()
+                try:
+                    quiz_a_editar = Quiz.objects.get(slug=idQuiz)
+                    if(quiz_a_editar.autor == request.user):
+                        quiz_a_editar.titulo = titulo
+                        quiz_a_editar.contenido = json.loads(contenido)
+                        #quiz_a_editar.contenido = contenido.replace('\"', '"').strip('"')
+                        quiz_a_editar.save()
+                        return HttpResponse("success", content_type='text/plain')
+                    else:
+                        return HttpResponse("error", content_type='text/plain')
+                except Exception:
+                    return HttpResponse("error", content_type='text/plain')
+
+def sendQuiz(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            idQuiz = request.POST.get("quiz")
+            idQuiz = idQuiz[idQuiz.rfind("/")+1:]
+            alias = request.POST.get("alias")
+            respuestas = request.POST.get("respuestas")
+            try:
+                quiz_org = Quiz.objects.get(slug=idQuiz)
+                quiz_enviado = RespuestaForm({'quiz':quiz_org, 'alias':alias, 'respuestas': respuestas, 'puntaje':100})
+                if quiz_enviado.is_valid():
+                    quiz_enviado.save()
                     return HttpResponse("success", content_type='text/plain')
                 else:
                     return HttpResponse("error", content_type='text/plain')
-
-
+            except Exception as e:
+                return HttpResponse("error", content_type='text/plain')
 
 def pages_views(request):
     if not request.user.is_authenticated:
